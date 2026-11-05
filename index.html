@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore a growing collection of responsive, animated and interactive web navigation menus.">
+  <meta name="theme-color" content="#0b1020">
+  <title>MENU — Navigation Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="MENU home"><span class="brand-mark">M</span><span>MENU<span class="brand-dot">.</span></span></a>
+    <nav class="top-links" aria-label="Main navigation">
+      <a href="#explore">Explore</a><a href="#categories">Categories</a><a href="ROADMAP.md">Roadmap</a>
+    </nav>
+    <a class="github-link" href="https://github.com/YOUR-USERNAME/MENU" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> THE OPEN NAVIGATION LIBRARY</div>
+      <h1>Every menu.<br><span>One collection.</span></h1>
+      <p class="hero-copy">Discover, explore and build with a growing library of beautiful navigation patterns for the modern web.</p>
+      <div class="hero-actions"><a class="button primary" href="#explore">Explore menus <span>↓</span></a><a class="button secondary" href="https://github.com/YOUR-USERNAME/MENU" target="_blank" rel="noreferrer">View repository ↗</a></div>
+      <div class="hero-stats">
+        <div><strong>500<span>+</span></strong><small>Planned examples</small></div>
+        <div><strong>15</strong><small>Categories</small></div>
+        <div><strong>06</strong><small>Technology tracks</small></div>
+      </div>
+      <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div>
+      <div class="floating-menu"><div class="float-top"><i></i><i></i><i></i><span>navigation.ui</span></div><div class="float-row active"><b>⌂</b> Overview <em>↗</em></div><div class="float-row"><b>▦</b> Components</div><div class="float-row"><b>◈</b> Animations</div><div class="float-row"><b>⚙</b> Settings</div></div>
+    </section>
+
+    <section class="explore section-wrap" id="explore">
+      <div class="section-heading"><div><div class="eyebrow">THE COLLECTION</div><h2>Find your next menu.</h2><p>Search patterns, browse categories and discover ideas.</p></div><span class="result-count" id="resultCount">15 categories</span></div>
+      <div class="toolbar">
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Search menus, styles, technologies..." aria-label="Search menus"></label>
+        <select id="techFilter" aria-label="Filter by technology"><option value="all">All technologies</option><option>HTML & CSS</option><option>JavaScript</option><option>Bootstrap</option><option>Tailwind CSS</option><option>React</option></select>
+        <select id="typeFilter" aria-label="Filter by menu type"><option value="all">All types</option><option>Basic</option><option>Dropdown</option><option>Mega</option><option>Animated</option><option>Mobile</option><option>Sidebar</option><option>Creative</option></select>
+      </div>
+      <div class="category-grid" id="categoryGrid" aria-live="polite"></div>
+      <div class="empty-state" id="emptyState" hidden>No categories match your search. Try another keyword or clear a filter.</div>
+    </section>
+
+    <section class="feature-band section-wrap" id="categories">
+      <div><div class="eyebrow">BUILT FOR BUILDERS</div><h2>More than a collection.<br><span>A practical learning resource.</span></h2></div>
+      <div class="feature-list"><div><b>01</b><span><strong>Responsive by default</strong><small>Designed for desktop, tablet and mobile.</small></span></div><div><b>02</b><span><strong>Readable source code</strong><small>Understand the pattern and customize it.</small></span></div><div><b>03</b><span><strong>Multiple technology tracks</strong><small>From vanilla HTML to React components.</small></span></div></div>
+    </section>
+    <section class="cta section-wrap"><div><div class="eyebrow">OPEN SOURCE · COMMUNITY BUILT</div><h2>Have a better way to navigate?</h2><p>Contribute a menu pattern and help make this library more useful for everyone.</p></div><a class="button primary" href="https://github.com/YOUR-USERNAME/MENU" target="_blank" rel="noreferrer">Contribute on GitHub ↗</a></section>
+  </main>
+  <footer><a class="brand" href="#"><span class="brand-mark">M</span><span>MENU<span class="brand-dot">.</span></span></a><p>Made for the people who build the web.</p><span>© <span id="year"></span> MENU · Open source</span></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
