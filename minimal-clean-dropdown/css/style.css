@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Minimal Clean Dropdown – style.css
+   1. Tokens  2. Base  3. Header & layout  4. Links  5. Dropdown (desktop)
+   6. Buttons  7. Mobile  8. Demo content  9. Reduced motion
+   ========================================================================== */
+
+/* 1. TOKENS – change these to restyle everything ------------------------- */
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f4f5f9;
+  --color-text: #14161c;
+  --color-muted: #555b6a;
+  --color-border: #e6e8ee;
+  --color-accent: #4338ca;
+  --color-accent-hover: #3730a3;
+  --color-accent-soft: #eceeff;
+  --color-on-accent: #ffffff;
+  --nav-bg: rgb(255 255 255 / 0.8);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --nav-height: 68px;
+  --container: 1200px;
+  --gutter: 1.5rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(16 24 40 / 0.06);
+  --shadow-lg: 0 20px 40px -14px rgb(16 24 40 / 0.2), 0 4px 10px -4px rgb(16 24 40 / 0.08);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 180ms;
+  --dur: 240ms;
+  --dur-slow: 300ms;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0e1016;
+  --color-surface: #161922;
+  --color-surface-alt: #1e222d;
+  --color-text: #eef0f6;
+  --color-muted: #a3a9b8;
+  --color-border: #272c39;
+  --color-accent: #8b93ff;
+  --color-accent-hover: #a5abff;
+  --color-accent-soft: #232846;
+  --color-on-accent: #0e1016;
+  --nav-bg: rgb(14 16 22 / 0.78);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 20px 40px -14px rgb(0 0 0 / 0.7), 0 4px 10px -4px rgb(0 0 0 / 0.5);
+}
+
+/* 2. BASE ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+ul { list-style: none; margin: 0; padding: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+.icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 200;
+  padding: 0.6rem 1rem; border-radius: var(--radius-sm);
+  background: var(--color-accent); color: var(--color-on-accent); text-decoration: none;
+  transition: top var(--dur-fast) var(--ease);
+}
+.skip-link:focus { top: 1rem; }
+
+/* 3. HEADER & LAYOUT ----------------------------------------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.site-header.is-scrolled { border-color: var(--color-border); box-shadow: var(--shadow-sm); }
+
+.nav {
+  display: flex; align-items: center; gap: 1rem;
+  max-width: var(--container); height: var(--nav-height);
+  margin: 0 auto; padding: 0 var(--gutter);
+}
+.nav-panel { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0; }
+.nav-list { display: flex; align-items: center; gap: 0.25rem; margin-left: 1.5rem; }
+.nav-actions { display: flex; align-items: center; gap: 0.6rem; }
+
+.brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; border-radius: var(--radius-sm); }
+.brand-mark { width: 30px; height: 30px; color: var(--color-on-accent); }
+.brand-mark rect { fill: var(--color-accent); }
+
+.nav-toggle { display: none; }
+
+/* 4. LINKS --------------------------------------------------------------- */
+.nav-link {
+  position: relative; display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.55rem 0.85rem; border: 0; background: none;
+  font-size: 0.95rem; font-weight: 500; text-decoration: none;
+  color: var(--color-muted); border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav-link:hover, .has-dropdown.is-open > .nav-trigger { color: var(--color-text); }
+/* Underline: grows on hover/open, stays (in accent colour) for the active section */
+.nav-link::after {
+  content: ""; position: absolute; left: 0.85rem; right: 0.85rem; bottom: 0.2rem; height: 2px;
+  border-radius: 2px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+.nav-link:hover::after, .has-dropdown.is-open > .nav-trigger::after { transform: scaleX(1); }
+.nav-link.is-active { color: var(--color-accent); }
+.nav-link.is-active::after { transform: scaleX(1); background: var(--color-accent); }
+
+.chevron { width: 16px; height: 16px; transition: transform var(--dur-fast) var(--ease); }
+.has-dropdown.is-open .chevron { transform: rotate(180deg); }
+
+/* 5. DROPDOWN (desktop) -------------------------------------------------- */
+.has-dropdown { position: relative; }
+.dropdown {
+  position: absolute; top: 100%; left: 50%; z-index: 10; width: 22rem;
+  padding-top: 12px; /* invisible hover "bridge": no gap, so no flicker */
+  opacity: 0; visibility: hidden;
+  transform: translate(-50%, -6px) scale(0.98); transform-origin: top center;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+.has-dropdown.is-open .dropdown {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0) scale(1);
+  transition-delay: 0s;
+}
+.dropdown-inner {
+  padding: 0.5rem; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+}
+.dropdown-link {
+  display: grid; grid-template-columns: 40px 1fr; align-items: center; gap: 0.85rem;
+  padding: 0.65rem; border-radius: var(--radius-md); text-decoration: none;
+  transition: background var(--dur-fast) var(--ease);
+}
+.dropdown-link:hover, .dropdown-link:focus-visible { background: var(--color-surface-alt); }
+.icon-box {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px;
+  background: var(--color-accent-soft); color: var(--color-accent);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.dropdown-link:hover .icon-box, .dropdown-link:focus-visible .icon-box {
+  background: var(--color-accent); color: var(--color-on-accent); transform: scale(1.05);
+}
+.dd-title { display: block; font-size: 0.94rem; font-weight: 600; line-height: 1.3; }
+.dd-desc { display: block; font-size: 0.82rem; color: var(--color-muted); line-height: 1.4; }
+
+/* 6. BUTTONS ------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 42px; padding: 0 1.2rem; border-radius: var(--radius-pill);
+  background: var(--color-accent); color: var(--color-on-accent);
+  font-size: 0.92rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 1px 2px rgb(67 56 202 / 0.3);
+  transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.btn:hover { background: var(--color-accent-hover); transform: translateY(-1px); box-shadow: 0 8px 16px -6px rgb(67 56 202 / 0.45); }
+.btn:active { transform: translateY(0); }
+
+.icon-btn {
+  display: grid; place-items: center; width: 42px; height: 42px; padding: 0;
+  background: transparent; border: 1px solid var(--color-border); border-radius: 50%;
+  color: var(--color-muted);
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.icon-btn:hover { color: var(--color-text); background: var(--color-surface-alt); }
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* 7. MOBILE (<= 900px): hamburger, slide-down panel, accordion ----------- */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: grid; place-content: center; gap: 5px; width: 44px; height: 44px; margin-left: auto;
+    padding: 0; background: none; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  }
+  .bar { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--color-text); transition: transform var(--dur) var(--ease), opacity var(--dur-fast) var(--ease); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-panel {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0.75rem;
+    max-height: calc(100vh - var(--nav-height)); max-height: calc(100dvh - var(--nav-height));
+    overflow-y: auto; padding: 0.75rem var(--gutter) 1.25rem;
+    background: var(--color-surface); border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-lg);
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur);
+  }
+  .nav-panel.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+
+  .nav-list { flex-direction: column; align-items: stretch; gap: 0.125rem; margin: 0; }
+  .nav-link { width: 100%; min-height: 48px; padding: 0.75rem; justify-content: space-between; font-size: 1rem; }
+  .nav-link::after { display: none; }
+  .nav-link.is-active { background: var(--color-accent-soft); }
+
+  /* Accordion: animate grid row from 0fr to 1fr */
+  .dropdown {
+    position: static; width: auto; padding: 0; display: grid; grid-template-rows: 0fr;
+    opacity: 1; visibility: hidden; transform: none;
+    transition: grid-template-rows var(--dur-slow) var(--ease), visibility 0s linear var(--dur-slow);
+  }
+  .has-dropdown.is-open .dropdown { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+  .dropdown-inner { min-height: 0; overflow: hidden; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; }
+  .dropdown-list { padding: 0.25rem 0 0.5rem 0.5rem; }
+  .dropdown-link { min-height: 56px; }
+
+  .nav-actions { padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
+  .nav-actions .btn { flex: 1; height: 48px; }
+  .icon-btn { width: 48px; height: 48px; }
+}
+
+/* 8. DEMO CONTENT (safe to delete) --------------------------------------- */
+.demo {
+  display: grid; align-content: center; gap: 0.75rem; min-height: 70vh;
+  max-width: var(--container); margin: 0 auto; padding: 4rem var(--gutter);
+  scroll-margin-top: var(--nav-height); border-top: 1px solid var(--color-border);
+}
+#home { min-height: calc(100vh - var(--nav-height)); border-top: 0; }
+.demo h1, .demo h2 { margin: 0; letter-spacing: -0.03em; line-height: 1.1; }
+.demo h1 { max-width: 16ch; font-size: clamp(2.2rem, 7vw, 4.5rem); }
+.demo h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
+.demo p { max-width: 55ch; margin: 0; color: var(--color-muted); font-size: 1.05rem; }
+
+/* 9. REDUCED MOTION ------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

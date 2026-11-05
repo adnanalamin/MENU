@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumen – Minimal Clean Dropdown Menu</title>
+  <meta name="description" content="A minimal, accessible dropdown navigation built with HTML, CSS and vanilla JavaScript.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- SVG icon sprite: icons are referenced with <use href="#i-name"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+      <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18M9 10v10"/></symbol>
+      <symbol id="i-shapes" viewBox="0 0 24 24"><circle cx="9" cy="9" r="5"/><rect x="11" y="11" width="9" height="9" rx="2"/></symbol>
+      <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6L7 10H4zM17.5 9.5a4 4 0 0 1 0 5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4zM8 17h10"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1zM14 7l3 3"/></symbol>
+      <symbol id="i-lifebuoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="m5.6 5.6 3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5M16 5.3a3.5 3.5 0 0 1 0 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#home" aria-label="Lumen, back to top">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9"/><path d="M10 9v10a3 3 0 0 0 3 3h9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21" cy="11" r="2.5" fill="currentColor"/></svg>
+        <span class="brand-name">Lumen</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <div class="nav-panel" id="nav-panel">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#home" data-section="home">Home</a></li>
+          <li><a class="nav-link" href="#about" data-section="about">About</a></li>
+
+          <li class="has-dropdown">
+            <button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="menu-services" data-section="services">
+              Services <svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="dropdown" id="menu-services">
+              <div class="dropdown-inner"><ul class="dropdown-list">
+                <li><a class="dropdown-link" href="#services"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span><span><span class="dd-title">Web Development</span><span class="dd-desc">Fast, accessible sites built to scale.</span></span></a></li>
+                <li><a class="dropdown-link" href="#services"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-layout"/></svg></span><span><span class="dd-title">UI/UX Design</span><span class="dd-desc">Interfaces shaped by research and testing.</span></span></a></li>
+                <li><a class="dropdown-link" href="#services"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-shapes"/></svg></span><span><span class="dd-title">Graphic Design</span><span class="dd-desc">Brand identities and visuals that stand out.</span></span></a></li>
+                <li><a class="dropdown-link" href="#services"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-megaphone"/></svg></span><span><span class="dd-title">Digital Marketing</span><span class="dd-desc">Campaigns that reach the right audience.</span></span></a></li>
+                <li><a class="dropdown-link" href="#services"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><span><span class="dd-title">SEO Optimization</span><span class="dd-desc">Rank higher and get found sooner.</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+
+          <li><a class="nav-link" href="#portfolio" data-section="portfolio">Portfolio</a></li>
+
+          <li class="has-dropdown">
+            <button class="nav-link nav-trigger" type="button" aria-expanded="false" aria-controls="menu-resources" data-section="resources">
+              Resources <svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            </button>
+            <div class="dropdown" id="menu-resources">
+              <div class="dropdown-inner"><ul class="dropdown-list">
+                <li><a class="dropdown-link" href="#resources"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span><span><span class="dd-title">Documentation</span><span class="dd-desc">Guides and API references.</span></span></a></li>
+                <li><a class="dropdown-link" href="#resources"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></span><span><span class="dd-title">Tutorials</span><span class="dd-desc">Step-by-step lessons to learn by doing.</span></span></a></li>
+                <li><a class="dropdown-link" href="#resources"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></span><span><span class="dd-title">Blog</span><span class="dd-desc">Articles on design and development.</span></span></a></li>
+                <li><a class="dropdown-link" href="#resources"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-lifebuoy"/></svg></span><span><span class="dd-title">Help Center</span><span class="dd-desc">Answers to common questions.</span></span></a></li>
+                <li><a class="dropdown-link" href="#resources"><span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span><span><span class="dd-title">Community</span><span class="dd-desc">Share ideas and get feedback.</span></span></a></li>
+              </ul></div>
+            </div>
+          </li>
+
+          <li><a class="nav-link" href="#contact" data-section="contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="icon-btn theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+            <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+            <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          </button>
+          <a class="btn" href="#contact">Get Started</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="demo" id="home">
+      <h1>A navigation menu that stays out of the way.</h1>
+      <p>Hover or click Services and Resources, press Escape to close, or tab through with the keyboard. Resize the window to try the mobile menu.</p>
+    </section>
+    <section class="demo" id="about"><h2>About</h2><p>Scroll to see the active link indicator follow the section in view.</p></section>
+    <section class="demo" id="services"><h2>Services</h2><p>Web, design, marketing and search work for growing teams.</p></section>
+    <section class="demo" id="portfolio"><h2>Portfolio</h2><p>Selected projects will live here.</p></section>
+    <section class="demo" id="resources"><h2>Resources</h2><p>Documentation, tutorials and community links.</p></section>
+    <section class="demo" id="contact"><h2>Contact</h2><p>Tell us what you are building.</p></section>
+  </main>
+</body>
+</html>
