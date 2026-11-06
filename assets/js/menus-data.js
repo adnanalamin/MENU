@@ -20,7 +20,7 @@ const menuItems = [
     tags: ["dropdown", "click", "keyboard", "accessible", "submenu"]
   },
   {
-    id: "003-glassmorphism-dropdown",
+    id: "001-glassmorphism-dropdown",
     name: "Glassmorphism Dropdown",
     category: "Dropdown",
     categoryName: "Dropdown Menus",
@@ -30,8 +30,8 @@ const menuItems = [
     tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
   },
   {
-    id: "004-minimal-clean-dropdown",
-    name: "Glassmorphism Dropdown",
+    id: "001-minimal-clean-dropdown",
+    name: "minimal clean dropdown",
     category: "Dropdown",
     categoryName: "Dropdown Menus",
     technology: ["HTML & CSS", "JavaScript"],
