@@ -1,68 +1,42 @@
+<div align="center">
+
 # MENU
 
 ### The Open Collection of Modern Web Navigation
 
-**500+ Responsive • Animated • Accessible • Reusable Menu Components**
+**500+ responsive • animated • accessible • reusable menu components**
 
-<p align="center">
-  <a href="https://github.com/adnanalamin/MENU/stargazers">
-    <img src="https://img.shields.io/github/stars/adnanalamin/MENU?style=for-the-badge&logo=github&color=yellow" alt="GitHub Stars">
-  </a>
-  <a href="https://github.com/adnanalamin/MENU/network/members">
-    <img src="https://img.shields.io/github/forks/adnanalamin/MENU?style=for-the-badge&logo=github" alt="GitHub Forks">
-  </a>
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License">
-  </a>
-  <a href="https://adnanalamin.github.io/MENU/">
-    <img src="https://img.shields.io/badge/Live-Demo-8b5cf6?style=for-the-badge" alt="Live Demo">
-  </a>
-</p>
+[![GitHub stars](https://img.shields.io/github/stars/adnanalamin/MENU?style=for-the-badge&logo=github)](https://github.com/adnanalamin/MENU/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/adnanalamin/MENU?style=for-the-badge&logo=github)](https://github.com/adnanalamin/MENU/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-8b5cf6?style=for-the-badge)](https://adnanalamin.github.io/MENU/)
 
-<p align="center">
-  <strong>Explore. Preview. Learn. Build.</strong>
-</p>
+**Explore. Preview. Learn. Build.**
 
-<p align="center">
-  <a href="https://adnanalamin.github.io/MENU/">Live Demo</a> ·
-  <a href="#-menu-categories">Browse Categories</a> ·
-  <a href="CONTRIBUTING.md">Contributing</a> ·
-  <a href="ROADMAP.md">Roadmap</a>
-</p>
+[Live Demo](https://adnanalamin.github.io/MENU/) · [Browse Categories](#-menu-categories) · [Contributing](CONTRIBUTING.md) · [Roadmap](#-roadmap)
+
+</div>
 
 ---
 
 ## ✨ About MENU
 
-**MENU** is an open-source collection of modern web navigation patterns for developers, designers, students, and creators.
+**MENU** is an open-source collection of web navigation patterns for developers, designers, students and creators. It brings together simple navigation bars, mega menus, mobile menus, sidebars, animated interactions and framework-specific implementations in one organized repository.
 
-It brings together simple navigation bars, dropdown menus, mega menus, mobile navigation, sidebars, animated interactions, and framework-specific implementations in one organized repository.
+The long-term goal is to publish **500+ practical menu examples**, each with a live preview, readable source code and clear usage instructions.
 
-Our long-term goal is to build a collection of **500+ practical navigation menu examples**, each with:
-
-- Live previews
-- Clean and readable source code
-- Responsive layouts
-- Accessible interactions
-- Easy customization
-- Clear documentation
-
-> MENU is designed as a learning resource, UI reference library, and reusable component collection for the developer community.
+> This repository is a learning and component reference library. Examples are independent projects; framework-specific examples may require their own setup.
 
 ## 🚀 Live Demo
 
-Explore the interactive navigation gallery:
+Visit the interactive gallery: **[adnanalamin.github.io/MENU](https://adnanalamin.github.io/MENU/)**
 
-**[https://adnanalamin.github.io/MENU/](https://adnanalamin.github.io/MENU/)**
-
-The gallery is designed to help developers discover, preview, and explore different navigation patterns.
-
-Each published example should have its own preview and documentation.
+The demo homepage is a searchable, filterable directory. Each published example should link to its own preview or documentation page.
 
 ## 🧭 Menu Categories
 
-| # | Category | Planned Examples |
-|:---:|---|---:|
+| # | Category | Planned examples |
+|---|---|---:|
 | 01 | Basic Navigation | 35+ |
 | 02 | Dropdown Menus | 35+ |
 | 03 | Mega Menus | 35+ |
@@ -78,48 +52,40 @@ Each published example should have its own preview and documentation.
 | 13 | Tailwind CSS Menus | 30+ |
 | 14 | React Navigation Components | 40+ |
 | 15 | Accessibility & Special Patterns | 20+ |
-| | **Total Target** | **500+** |
+| | **Total target** | **500+** |
 
-*These numbers are planning targets, not a claim that all examples have already been published.*
+Counts are planning targets, not a claim that all examples are already published.
 
 ## 🧰 Technologies
 
-MENU covers multiple frontend technologies and development approaches.
+- **Core:** HTML5, CSS3, Vanilla JavaScript
+- **CSS frameworks:** Bootstrap 5, Tailwind CSS
+- **UI library:** React
+- **Optional integrations:** React Router and icon libraries where an example needs them
 
-| Technology | Usage |
-|---|---|
-| HTML5 | Semantic structure |
-| CSS3 | Styling and animations |
-| Vanilla JavaScript | Interactive navigation |
-| Bootstrap 5 | Framework-based menus |
-| Tailwind CSS | Utility-first navigation |
-| React | Reusable React components |
-| React Router | Optional route-aware navigation |
-
-Each example will clearly mention its technology, dependencies, and setup instructions.
+Each example must clearly state its required technology and dependencies. Core examples should avoid unnecessary dependencies.
 
 ## 📁 Repository Structure
 
 ```text
 MENU/
-│
-├── index.html
+├── index.html                  # Interactive GitHub Pages gallery
 ├── README.md
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── ROADMAP.md
-│
 ├── assets/
 │   ├── css/
 │   ├── js/
 │   ├── images/
 │   └── screenshots/
-│
 ├── 01-basic-navigation/
-│   ├── 001-simple-navbar/
-│   ├── 002-sticky-navbar/
-│   └── 003-transparent-navbar/
-│
+│   └── 001-simple-navbar/
+│       ├── index.html
+│       ├── style.css
+│       ├── script.js
+│       ├── preview.png
+│       └── README.md
 ├── 02-dropdown-menus/
 ├── 03-mega-menus/
 ├── 04-animated-menus/
@@ -136,15 +102,14 @@ MENU/
 └── 15-accessibility-patterns/
 ```
 
-Every example uses a unique numbered folder to keep the collection organized as it grows.
+Use a numbered folder for each example (for example, `001-simple-navbar`) so examples remain easy to find as the collection grows.
 
 ## 🧩 Example Folder Standard
 
-A standard HTML, CSS, and JavaScript example should follow this structure:
+Every menu should be self-contained and follow the same conventions:
 
 ```text
 001-example-name/
-│
 ├── index.html
 ├── style.css
 ├── script.js
@@ -152,169 +117,106 @@ A standard HTML, CSS, and JavaScript example should follow this structure:
 └── README.md
 ```
 
-React and other framework-based examples may include their own project structure, such as:
+For React or build-tool examples, include the required project files such as `package.json`, `src/` and setup instructions instead of forcing the plain HTML structure.
 
-```text
-001-react-navigation/
-│
-├── package.json
-├── index.html
-├── src/
-│   ├── App.jsx
-│   ├── components/
-│   ├── styles/
-│   └── main.jsx
-└── README.md
-```
+Every example README should include:
 
-### Every Example README Must Include
-
-1. Menu name and category
+1. Name and category
 2. Short description
-3. Technologies and dependencies
+3. Technology and dependencies
 4. Screenshot or GIF preview
 5. Features
-6. Local setup instructions
-7. Customization guide
-8. Accessibility and keyboard notes
-9. Browser compatibility
+6. How to run locally
+7. Customization notes
+8. Keyboard and accessibility notes
+9. Browser support
 
 ## 🧪 Quality Standards
 
-Every contribution should meet these standards:
+Before an example is merged, check that it:
 
-- [ ] Fully responsive on desktop, tablet, and mobile
-- [ ] No unwanted horizontal overflow
-- [ ] Semantic HTML structure
-- [ ] Accessible navigation labels
-- [ ] Keyboard-friendly interactions
-- [ ] Visible focus indicators
-- [ ] Good color contrast
-- [ ] Touch-friendly controls
-- [ ] Support for `prefers-reduced-motion`
-- [ ] No unnecessary dependencies
-- [ ] No console errors
-- [ ] Working links and assets
-- [ ] Accurate README and preview screenshot
-- [ ] Original design or properly attributed assets
-
-**Quality matters more than quantity.** Color-only variations and near-duplicate menus should not be accepted as separate examples.
+- [ ] Works at mobile, tablet and desktop widths
+- [ ] Has no horizontal overflow at common viewport sizes
+- [ ] Supports keyboard navigation where interactive
+- [ ] Uses semantic HTML and meaningful accessible labels
+- [ ] Has visible focus states and sensible contrast
+- [ ] Respects `prefers-reduced-motion`
+- [ ] Opens and closes predictably; no accidental hover-only interaction on touch
+- [ ] Has no console errors or broken assets
+- [ ] Includes a screenshot and accurate README
+- [ ] Uses original code/design or properly attributed assets
 
 ## ⚡ Run Locally
 
-### 1. Clone the repository
+Most HTML/CSS/JavaScript examples can be opened directly:
 
-```bash
-git clone https://github.com/adnanalamin/MENU.git
-```
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/adnanalamin/MENU.git
+   ```
+2. Open the project folder.
+3. Open the root `index.html` in your browser, or use the VS Code **Live Server** extension.
+4. Select a category and open an example.
 
-### 2. Open the project
+For React examples, follow the `README.md` inside that example and install its dependencies.
 
-```bash
-cd MENU
-```
+## 🌐 Publish with GitHub Pages
 
-### 3. Run the gallery
-
-Open the root `index.html` file in your browser.
-
-Alternatively, use the **Live Server** extension in Visual Studio Code.
-
-### 4. Run individual examples
-
-Open the example folder and follow its README instructions.
-
-For React projects, install the required dependencies first:
-
-```bash
-npm install
-npm run dev
-```
-
-## 🌐 GitHub Pages Deployment
-
-MENU uses a static HTML, CSS, and JavaScript gallery, so the root homepage does not require a build process.
-
-To publish:
-
-1. Push your repository to GitHub.
+1. Push this repository to GitHub.
 2. Open **Settings → Pages**.
-3. Select **Deploy from a branch**.
-4. Choose the `main` branch.
-5. Select `/ (root)` as the folder.
-6. Click **Save**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select branch `main` and folder `/ (root)`.
+5. Save and wait for deployment.
+6. Your gallery will be available at `https://adnanalamin.github.io/MENU/`.
 
-Your live gallery will be available at:
+The root gallery is plain HTML, CSS and JavaScript, so it does not need a build step.
 
-**https://adnanalamin.github.io/MENU/**
+## ➕ Add a New Menu
+
+See [ADD-NEW-MENU.md](ADD-NEW-MENU.md). Add the example folder, then register it once in `assets/js/menus-data.js`; the gallery search and filters update automatically.
 
 ## 🤝 Contributing
 
-Contributions from developers and designers are welcome!
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a pull request.
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a pull request.
+Good contributions include:
 
-You can contribute by:
+- New menu patterns
+- Responsive and accessibility improvements
+- Bug fixes and browser compatibility fixes
+- Better documentation and screenshots
+- Framework-specific versions of existing patterns
 
-- Creating new navigation patterns
-- Improving responsive layouts
-- Adding accessibility features
-- Fixing bugs
-- Improving documentation
-- Providing screenshots
-- Adding Bootstrap, Tailwind, or React implementations
-
-### Contribution Principles
-
-- Keep every example self-contained.
-- Follow the numbered folder convention.
-- Avoid duplicate designs.
-- Write clean and readable code.
-- Test on multiple screen sizes.
-- Include setup and customization instructions.
+Avoid submitting near-duplicate examples. Prefer a genuinely useful variation with a clear purpose.
 
 ## 🗺️ Roadmap
 
-See [ROADMAP.md](ROADMAP.md) for the development plan.
+See **[ROADMAP.md](ROADMAP.md)** for the staged plan from the first 20 examples to the 500+ library.
 
-| Milestone | Goal |
-|---|---|
-| Phase 1 | Repository foundation |
-| Phase 2 | First 20 quality examples |
-| Phase 3 | 100+ navigation menus |
-| Phase 4 | Framework-specific collections |
-| Phase 5 | 250+ navigation menus |
-| Phase 6 | 500+ navigation menus |
-| Phase 7 | Advanced search and live preview |
-| Phase 8 | Community contribution improvements |
-
-- [ ] Repository foundation
-- [ ] Interactive gallery
-- [ ] First 20 examples
+- [ ] Foundation and gallery
+- [ ] First 20 core menus
 - [ ] 100-menu milestone
 - [ ] Framework collections
 - [ ] 250-menu milestone
 - [ ] 500+ menu collection
-- [ ] Advanced gallery improvements
+- [ ] Search, filters and contribution automation improvements
 
 ## 📜 License
 
-This project is intended to use the **MIT License**.
-
-See the [LICENSE](LICENSE) file for details.
-
-Individual third-party assets and dependencies may have separate licenses. Please check their terms before using them.
+This project is intended to use the **MIT License**. Add the `LICENSE` file containing the standard MIT license text and your copyright details before publishing. Individual third-party assets may have separate licenses; check them before use.
 
 ## 👤 Maintainer
 
-**AL AMIN ADNAN**
+Created and maintained by **AL AMIN ADNAN**.
 
 - GitHub: [@adnanalamin](https://github.com/adnanalamin)
 
 ---
 
-<p align="center">
-  <strong>If MENU helps you, consider giving this repository a ⭐</strong>
-  <br>
-  Made for the developer community.
-</p>
+<div align="center">
+
+**If MENU helps you, consider giving the repository a ⭐**
+
+Made for the developer community.
+
+</div>
