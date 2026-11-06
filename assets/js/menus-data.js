@@ -26,7 +26,17 @@ const menuItems = [
     categoryName: "Dropdown Menus",
     technology: ["HTML & CSS", "JavaScript"],
     description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
-    path: "03-dropdown-menus",
+    path: "03-dropdown-menus/003-dropdown-menus/",
+    tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
+  },
+  {
+    id: "004-minimal-clean-dropdown",
+    name: "Glassmorphism Dropdown",
+    category: "Dropdown",
+    categoryName: "Dropdown Menus",
+    technology: ["HTML & CSS", "JavaScript"],
+    description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
+    path: "04-minimal-clean-dropdown/004-minimal-clean-dropdown/",
     tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
   }
 ];
