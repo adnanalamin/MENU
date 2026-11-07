@@ -1,0 +1,1126 @@
+/* ==========================================================================
+   NOVA – Glassmorphism Dropdown
+   Structure
+     1. Design tokens (dark default, light override)
+     2. Base + utilities
+     3. Ambient background
+     4. Navbar (mobile-first)
+     5. Nav links, theme + menu buttons
+     6. Dropdown panels (accordion on mobile)
+     7. Dropdown items + mega menu
+     8. Buttons
+     9. Demo page
+    10. Desktop layout (min-width: 881px)
+    11. Fallbacks + reduced motion
+   The mobile breakpoint (880px) is repeated in js/script.js (CONFIG.mobileQuery).
+   ========================================================================== */
+
+/* 1. DESIGN TOKENS ------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-primary: #070a1a;
+  --bg-secondary: #0b1130;
+  --ambient-gradient: linear-gradient(160deg, #0b1130 0%, #070a1a 55%, #05060f 100%);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-nav: rgba(255, 255, 255, 0.07);
+  --glass-bg-elevated: rgba(20, 25, 56, 0.62);
+  --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 45%);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.2);
+  --hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #f3f5ff;
+  --text-secondary: #a9b0cf;
+  --text-muted: #8189ad;
+
+  /* Accents */
+  --accent-primary: #8b7bff;
+  --accent-secondary: #3fd2ff;
+  --accent-glow: rgba(139, 123, 255, 0.45);
+  --icon-color: #cfc9ff;
+  --icon-bg: linear-gradient(145deg, rgba(139, 123, 255, 0.3), rgba(63, 210, 255, 0.14));
+  --btn-from: #6d5df2;
+  --btn-to: #3f6fe8;
+  --focus-ring: #6fe0ff;
+
+  /* Ambient blobs */
+  --blob-1: rgba(120, 92, 255, 0.55);
+  --blob-2: rgba(34, 200, 255, 0.34);
+  --blob-3: rgba(236, 72, 153, 0.3);
+
+  /* Shadows */
+  --shadow-glass: 0 24px 60px -16px rgba(2, 4, 20, 0.7), 0 2px 8px rgba(2, 4, 20, 0.3);
+
+  /* Glass tuning (see README > Customization) */
+  --blur-nav: 18px;
+  --blur-panel: 24px;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  /* Motion */
+  --dur-fast: 180ms;
+  --dur: 260ms;
+  --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+
+  /* Layout */
+  --nav-max: 1080px;
+  --nav-pad-y: 0.5rem;
+  --dropdown-gap: 0.85rem;
+
+  /* Type */
+  --font-sans: "Plus Jakarta Sans", "SF Pro Display", system-ui, -apple-system,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-primary: #eef1ff;
+  --bg-secondary: #e6efff;
+  --ambient-gradient: linear-gradient(160deg, #f4f1ff 0%, #e8f0ff 55%, #f8eefb 100%);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-nav: rgba(255, 255, 255, 0.58);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.74);
+  --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 50%);
+  --glass-border: rgba(70, 80, 160, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --hover-bg: rgba(70, 80, 170, 0.09);
+
+  --text-primary: #141737;
+  --text-secondary: #4a5178;
+  --text-muted: #6a7197;
+
+  --accent-primary: #5b4cf0;
+  --accent-secondary: #1d8fe0;
+  --accent-glow: rgba(91, 76, 240, 0.35);
+  --icon-color: #4a3fd1;
+  --icon-bg: linear-gradient(145deg, rgba(109, 93, 242, 0.18), rgba(56, 150, 255, 0.12));
+  --focus-ring: #4a3fd1;
+
+  --blob-1: rgba(150, 130, 255, 0.55);
+  --blob-2: rgba(90, 200, 255, 0.5);
+  --blob-3: rgba(255, 150, 200, 0.45);
+
+  --shadow-glass: 0 24px 50px -18px rgba(60, 70, 150, 0.35), 0 2px 8px rgba(60, 70, 150, 0.12);
+}
+
+/* 2. BASE + UTILITIES ---------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* 3. AMBIENT BACKGROUND -------------------------------------------------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--ambient-gradient);
+}
+
+.ambient__blob {
+  position: absolute;
+  width: clamp(320px, 52vw, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  will-change: transform;
+  animation-name: drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.ambient__blob--1 {
+  top: -14%;
+  left: -10%;
+  background: radial-gradient(circle, var(--blob-1) 0%, transparent 68%);
+  animation-duration: 22s;
+}
+
+.ambient__blob--2 {
+  top: 6%;
+  right: -14%;
+  background: radial-gradient(circle, var(--blob-2) 0%, transparent 68%);
+  animation-duration: 28s;
+  animation-delay: -8s;
+}
+
+.ambient__blob--3 {
+  bottom: -20%;
+  left: 26%;
+  background: radial-gradient(circle, var(--blob-3) 0%, transparent 68%);
+  animation-duration: 34s;
+  animation-delay: -14s;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, 6%, 0) scale(1.08); }
+}
+
+/* 4. NAVBAR (mobile-first) ----------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: clamp(8px, 2vw, 16px);
+  z-index: 100;
+  padding-inline: clamp(10px, 3vw, 24px);
+}
+
+/*
+  The glass lives on ::before, not on .navbar itself. A parent with its own
+  backdrop-filter becomes a "backdrop root" and would stop the dropdown panels
+  from blurring the page behind them.
+*/
+.navbar {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: var(--nav-max);
+  margin-inline: auto;
+  padding: var(--nav-pad-y) 0.5rem var(--nav-pad-y) 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--glass-sheen), var(--glass-bg-nav);
+  -webkit-backdrop-filter: blur(var(--blur-nav)) saturate(160%);
+  backdrop-filter: blur(var(--blur-nav)) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-highlight);
+  pointer-events: none;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.25rem 0.25rem 0.25rem 0;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+}
+
+.brand__mark {
+  position: relative;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.85), transparent 36%),
+              linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+.navbar__tools {
+  display: flex;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+/* Mobile slide-down panel. Rows animate 0fr -> 1fr so height is natural. */
+.nav-collapse {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 -8px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-sheen), var(--glass-bg-elevated);
+  -webkit-backdrop-filter: blur(var(--blur-panel)) saturate(170%);
+  backdrop-filter: blur(var(--blur-panel)) saturate(170%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-highlight);
+  transition:
+    grid-template-rows var(--dur) var(--ease),
+    opacity var(--dur) var(--ease),
+    translate var(--dur) var(--ease),
+    visibility 0s linear var(--dur);
+}
+
+.navbar.is-menu-open .nav-collapse {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0s;
+}
+
+.nav-collapse__inner {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100vh - 6.5rem);
+  max-height: calc(100dvh - 6.5rem);
+  overscroll-behavior: contain;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.6rem 0.6rem 0.3rem;
+  list-style: none;
+}
+
+.nav-cta {
+  display: flex;
+  margin: 0.4rem 0.6rem 0.7rem;
+}
+
+/* 5. NAV LINKS + ICON BUTTONS ------------------------------------------- */
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.7rem 0.85rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+
+.nav-link__icon {
+  color: var(--accent-secondary);
+}
+
+.nav-link:hover,
+.nav-item.is-open > .nav-trigger,
+.nav-link.is-active {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.chevron {
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  transition: transform var(--dur) var(--ease);
+}
+
+.nav-item.is-open > .nav-trigger .chevron {
+  transform: rotate(180deg);
+}
+
+.icon-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+
+.icon-button:hover {
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+.icon-button .icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+/* Menu <-> close crossfade */
+.menu-toggle .icon--close {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.menu-toggle[aria-expanded="true"] .icon--menu {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+.menu-toggle[aria-expanded="true"] .icon--close {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sun (shown in dark) <-> moon (shown in light) */
+.theme-toggle .icon--moon {
+  opacity: 0;
+  transform: rotate(-60deg) scale(0.6);
+}
+
+:root[data-theme="light"] .theme-toggle .icon--sun {
+  opacity: 0;
+  transform: rotate(60deg) scale(0.6);
+}
+
+:root[data-theme="light"] .theme-toggle .icon--moon {
+  opacity: 1;
+  transform: none;
+}
+
+/* 6. DROPDOWN PANELS (accordion on mobile) ------------------------------- */
+.dropdown {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+
+.nav-item.is-open > .dropdown {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.dropdown__panel {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Staggered entrance shared by items and the featured card */
+.stagger {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.nav-item.is-open .stagger {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(60ms + var(--i, 0) * 35ms);
+}
+
+/* 7. DROPDOWN ITEMS + MEGA MENU ------------------------------------------ */
+.menu-list {
+  margin: 0.1rem 0 0.4rem 1.35rem;
+  padding: 0 0 0 0.4rem;
+  border-left: 1px solid var(--glass-border);
+  list-style: none;
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) ease;
+}
+
+.menu-item__icon,
+.mega-link__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--icon-bg);
+  color: var(--icon-color);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.menu-item__icon .icon,
+.mega-link__icon .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.menu-item__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.menu-item__title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.menu-item__desc {
+  display: none;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.menu-item__arrow {
+  display: none;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible,
+.mega-link:hover,
+.mega-link:focus-visible {
+  background: var(--hover-bg);
+}
+
+.menu-item:hover .menu-item__icon,
+.menu-item:focus-visible .menu-item__icon,
+.mega-link:hover .mega-link__icon,
+.mega-link:focus-visible .mega-link__icon {
+  transform: translateX(2px) scale(1.06);
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+/* Mega menu (compact links + featured card) */
+.mega {
+  display: block;
+}
+
+.mega__groups {
+  display: block;
+}
+
+.mega__title {
+  margin: 0.4rem 0 0.1rem 1.35rem;
+  padding-left: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mega-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color var(--dur-fast) ease;
+}
+
+.feature-card {
+  position: relative;
+  margin: 0.5rem 0.6rem 0.8rem;
+  padding: 1.1rem;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(139, 123, 255, 0.38), transparent 60%),
+    radial-gradient(90% 80% at 0% 100%, rgba(63, 210, 255, 0.22), transparent 60%),
+    var(--glass-bg);
+  box-shadow: 0 0 40px -12px var(--accent-glow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.feature-card__title {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+}
+
+.feature-card__text {
+  margin: 0 0 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* 8. BUTTONS ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--btn-from), var(--btn-to));
+  box-shadow: 0 8px 20px -8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease, filter var(--dur-fast) ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn--glass {
+  background: var(--hover-bg);
+  border-color: var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+  color: var(--text-primary);
+}
+
+.btn--glass .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  transition: transform var(--dur) var(--ease);
+}
+
+.btn--glass:hover .icon {
+  transform: translateX(3px);
+}
+
+/* 9. DEMO PAGE ----------------------------------------------------------- */
+.page {
+  max-width: var(--nav-max);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 8vw, 6rem) clamp(1.1rem, 4vw, 1.5rem) 3rem;
+}
+
+.section {
+  padding-top: clamp(3rem, 8vw, 5.5rem);
+  scroll-margin-top: 6.5rem;
+}
+
+.section--last {
+  min-height: 85vh;
+}
+
+.section h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.section__lead {
+  max-width: 60ch;
+  margin: 0 0 2rem;
+  color: var(--text-secondary);
+}
+
+.hero {
+  padding-top: clamp(1rem, 5vw, 3rem);
+}
+
+.hero__title {
+  max-width: 14ch;
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+.hero__lead {
+  max-width: 52ch;
+  margin: 0 0 2.5rem;
+  color: var(--text-secondary);
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+}
+
+.glass-panel {
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-sheen), var(--glass-bg);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-highlight);
+}
+
+.hints {
+  display: grid;
+  margin: 0;
+}
+
+.hints__item {
+  padding: 1.2rem 1.4rem;
+}
+
+.hints__item + .hints__item {
+  border-top: 1px solid var(--glass-border);
+}
+
+.hints dt {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.hints dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.entry-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 0 2.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry-list li {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--glass-border);
+  scroll-margin-top: 6.5rem;
+}
+
+.entry-list h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.entry-list p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.site-footer {
+  max-width: var(--nav-max);
+  margin-inline: auto;
+  padding: 2rem clamp(1.1rem, 4vw, 1.5rem) 3rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .hints {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hints__item + .hints__item {
+    border-top: 0;
+    border-left: 1px solid var(--glass-border);
+  }
+}
+
+/* 10. DESKTOP LAYOUT ----------------------------------------------------- */
+@media (min-width: 881px) {
+  .navbar {
+    gap: 1rem;
+    padding: var(--nav-pad-y) 0.6rem var(--nav-pad-y) 1rem;
+  }
+
+  .navbar__tools {
+    margin-left: 0;
+  }
+
+  .icon-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  /* Collapse panel turns into plain inline layout. Static so the mega menu
+     can position itself against the navbar. */
+  .nav-collapse {
+    position: static;
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    visibility: visible;
+    opacity: 1;
+    translate: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transition: none;
+  }
+
+  .nav-collapse__inner {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.15rem;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+    display: flex;
+  }
+
+  .nav-item--mega {
+    position: static;
+  }
+
+  .nav-cta {
+    align-self: center;
+    margin: 0 0 0 0.5rem;
+  }
+
+  .nav-link {
+    align-items: center;
+    width: auto;
+    min-height: 0;
+    padding: 0.55rem 0.8rem;
+    gap: 0.4rem;
+    font-size: 0.94rem;
+  }
+
+  .nav-link__icon {
+    display: none;
+  }
+
+  .chevron {
+    margin-left: 0;
+  }
+
+  /* Underline that grows from the centre on hover / active / open */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 0 10px var(--accent-glow);
+    translate: -50% 0;
+    transition: width var(--dur) var(--ease);
+  }
+
+  /* Desktop: the current section shows an underline only; the pill is for hover/open */
+  .nav-link.is-active:not(:hover):not(:focus-visible):not([aria-expanded="true"]) {
+    background: transparent;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.is-active::after,
+  .nav-item.is-open > .nav-trigger::after {
+    width: 1.1rem;
+  }
+
+  /* Floating glass panel */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + var(--nav-pad-y) + var(--dropdown-gap));
+    left: 50%;
+    z-index: 5;
+    display: block;
+    width: min(21.5rem, calc(100vw - 1.5rem));
+    translate: -50% 0;
+    pointer-events: none;
+  }
+
+  /* Invisible bridge so the pointer can travel from link to panel without
+     the menu closing (prevents flicker). */
+  .dropdown::before {
+    content: "";
+    position: absolute;
+    top: calc(-1 * (var(--nav-pad-y) + var(--dropdown-gap)));
+    right: 0;
+    left: 0;
+    height: calc(var(--nav-pad-y) + var(--dropdown-gap));
+  }
+
+  .nav-item.is-open > .dropdown {
+    pointer-events: auto;
+  }
+
+  .dropdown__panel {
+    min-height: auto;
+    padding: 0.5rem;
+    overflow: visible;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: var(--glass-sheen), var(--glass-bg-elevated);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    backdrop-filter: blur(0px) saturate(100%);
+    box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-highlight);
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+    transform-origin: top center;
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      -webkit-backdrop-filter var(--dur) var(--ease),
+      backdrop-filter var(--dur) var(--ease);
+  }
+
+  .nav-item.is-open .dropdown__panel {
+    opacity: 1;
+    transform: none;
+    -webkit-backdrop-filter: blur(var(--blur-panel)) saturate(170%);
+    backdrop-filter: blur(var(--blur-panel)) saturate(170%);
+  }
+
+  .menu-list {
+    margin: 0;
+    padding: 0;
+    border-left: 0;
+  }
+
+  .menu-item {
+    gap: 0.9rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .menu-item__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 12px;
+  }
+
+  .menu-item__icon .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .menu-item__desc {
+    display: block;
+  }
+
+  .menu-item__arrow {
+    display: block;
+    margin-left: auto;
+    opacity: 0.4;
+    transition: opacity var(--dur-fast) ease, transform var(--dur) var(--ease);
+  }
+
+  .menu-item:hover .menu-item__arrow,
+  .menu-item:focus-visible .menu-item__arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* Mega menu: wide panel centred on the navbar */
+  .nav-item--mega > .dropdown {
+    right: 0;
+    left: 0;
+    width: min(48.75rem, 100%);
+    margin-inline: auto;
+    translate: none;
+  }
+
+  .mega {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 15rem);
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .mega__groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem;
+  }
+
+  .mega__title {
+    margin: 0.2rem 0 0.35rem;
+    padding: 0 0.7rem;
+  }
+
+  .mega-link {
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.92rem;
+    line-height: 1.25;
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 1.25rem;
+  }
+
+  .feature-card .btn {
+    align-self: flex-start;
+  }
+
+  .hints__item {
+    padding: 1.4rem 1.6rem;
+  }
+}
+
+/* Tighter spacing so six links + CTA fit between 881px and 1024px */
+@media (min-width: 881px) and (max-width: 1024px) {
+  .navbar {
+    gap: 0.6rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.55rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-cta {
+    margin-left: 0.25rem;
+    padding-inline: 0.9rem;
+  }
+}
+
+/* 11. FALLBACKS + REDUCED MOTION ---------------------------------------- */
+/* No backdrop-filter: use near-opaque panels so text stays readable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --glass-bg-nav: rgba(20, 25, 56, 0.9);
+    --glass-bg-elevated: rgba(20, 25, 56, 0.96);
+    --glass-bg: rgba(30, 36, 78, 0.8);
+  }
+
+  :root[data-theme="light"] {
+    --glass-bg-nav: rgba(255, 255, 255, 0.92);
+    --glass-bg-elevated: rgba(255, 255, 255, 0.97);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 1ms;
+    --dur-fast: 1ms;
+  }
+
+  .ambient__blob {
+    animation: none;
+  }
+
+  .dropdown__panel,
+  .stagger,
+  .menu-item:hover .menu-item__icon,
+  .menu-item:focus-visible .menu-item__icon,
+  .mega-link:hover .mega-link__icon,
+  .mega-link:focus-visible .mega-link__icon,
+  .menu-item:hover .menu-item__arrow,
+  .menu-item:focus-visible .menu-item__arrow,
+  .btn:hover,
+  .btn--glass:hover .icon,
+  .nav-collapse {
+    transform: none;
+    translate: none;
+  }
+
+  .nav-item.is-open .stagger {
+    transition-delay: 0s;
+  }
+}

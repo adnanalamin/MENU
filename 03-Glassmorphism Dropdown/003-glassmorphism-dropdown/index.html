@@ -7,15 +7,15 @@
   <meta name="description" content="A premium glassmorphism navigation bar with dropdowns, a mega menu, a mobile accordion and a dark/light theme. Built with HTML, CSS and vanilla JavaScript.">
   <meta name="theme-color" content="#070a1a">
   <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <!-- Loaded in <head> (no defer) so the saved theme is applied before first paint. -->
-  <script src="js/script.js"></script>
+  
 </head>
 <body>
 
   <!-- ============================================================
        SVG ICON SPRITE – every icon is a <symbol> referenced with
-       <svg class="icon"><use href="#i-name"/></svg>
+       <svg class="icon"> + use element pointing at the symbol id
        Stroke, size and colour are controlled from CSS (.icon).
        ============================================================ -->
   <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
@@ -351,6 +351,6 @@
   <footer class="site-footer">
     <p>NOVA glassmorphism dropdown. Built with HTML5, CSS3 and vanilla JavaScript.</p>
   </footer>
-
+<script src="script.js"></script>
 </body>
 </html>
