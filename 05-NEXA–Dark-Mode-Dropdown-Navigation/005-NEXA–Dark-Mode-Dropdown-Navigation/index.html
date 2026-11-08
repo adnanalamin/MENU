@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#050505">
+<title>NEXA – Dark Mode Dropdown Navigation</title>
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Inline SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="i-logo" viewBox="0 0 24 24"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7z"/><path d="M9 15V9l6 6V9"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></symbol>
+<symbol id="i-about" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></symbol>
+<symbol id="i-services" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+<symbol id="i-products" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-resources" viewBox="0 0 24 24"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 19V5M9 7h6"/></symbol>
+<symbol id="i-contact" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="i-uiux" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+<symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+<symbol id="i-backend" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></symbol>
+<symbol id="i-api" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+<symbol id="i-automation" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-saas" viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5 5 0 019.6-1A4.5 4.5 0 0117 18z"/></symbol>
+<symbol id="i-ecommerce" viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h10L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></symbol>
+<symbol id="i-crm" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.6a3.5 3.5 0 010 6.8M18 14a6.5 6.5 0 013.5 6"/></symbol>
+<symbol id="i-analytics" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-docs" viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6zM14 2v5h5M9 13h7M9 17h7"/></symbol>
+<symbol id="i-blog" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/></symbol>
+<symbol id="i-community" viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M2 19a6 6 0 0112 0M15 15.5a5 5 0 017 3.5"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .7-1.5 1.2-1.5 2.5M12 17.5v.01"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="#home" aria-label="NEXA home">
+      <span class="logo"><svg class="i" aria-hidden="true"><use href="#i-logo"/></svg></span>
+      <span>NEXA</span>
+    </a>
+
+    <ul class="nav-list" id="nav-list">
+      <li><a class="nav-link" href="#home"><svg class="i ico" aria-hidden="true"><use href="#i-home"/></svg>Home</a></li>
+      <li><a class="nav-link" href="#about"><svg class="i ico" aria-hidden="true"><use href="#i-about"/></svg>About</a></li>
+
+      <li class="has-dd">
+        <button class="nav-link dd-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="dd-services">
+          <svg class="i ico" aria-hidden="true"><use href="#i-services"/></svg>Services<svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <div class="dd dd-services" id="dd-services"><div class="dd-inner"><div class="dd-grid">
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-web"/></svg></span><span class="txt"><span class="title">Web Development</span><span class="desc">Modern websites and web applications.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-uiux"/></svg></span><span class="txt"><span class="title">UI/UX Design</span><span class="desc">Beautiful and intuitive digital interfaces.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-mobile"/></svg></span><span class="txt"><span class="title">Mobile Development</span><span class="desc">Responsive mobile applications.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-backend"/></svg></span><span class="txt"><span class="title">Backend Development</span><span class="desc">Secure and scalable backend systems.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-api"/></svg></span><span class="txt"><span class="title">API Development</span><span class="desc">Reliable APIs for modern applications.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#services"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-automation"/></svg></span><span class="txt"><span class="title">Automation</span><span class="desc">Automate repetitive business workflows.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div></div></div>
+      </li>
+
+      <li class="has-dd">
+        <button class="nav-link dd-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="dd-products">
+          <svg class="i ico" aria-hidden="true"><use href="#i-products"/></svg>Products<svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <div class="dd dd-products" id="dd-products"><div class="dd-inner"><div class="dd-grid">
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-saas"/></svg></span><span class="txt"><span class="title">SaaS Platform</span><span class="desc">Launch and scale subscription products.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-ecommerce"/></svg></span><span class="txt"><span class="title">E-commerce</span><span class="desc">Storefronts built for conversion.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-crm"/></svg></span><span class="txt"><span class="title">CRM</span><span class="desc">Keep every customer relationship in sync.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-analytics"/></svg></span><span class="txt"><span class="title">Analytics</span><span class="desc">Real-time insight into product usage.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-automation"/></svg></span><span class="txt"><span class="title">Automation</span><span class="desc">Trigger-based workflows without code.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="dd-item" href="#products"><span class="ico-box"><svg class="i" aria-hidden="true"><use href="#i-api"/></svg></span><span class="txt"><span class="title">Developer Tools</span><span class="desc">SDKs, CLI and sandboxes for builders.</span></span><svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div></div></div>
+      </li>
+
+      <li class="has-dd">
+        <button class="nav-link dd-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="dd-resources">
+          <svg class="i ico" aria-hidden="true"><use href="#i-resources"/></svg>Resources<svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <div class="dd dd-resources" id="dd-resources"><div class="dd-inner"><div class="mega">
+          <p class="mega-label">Resources</p>
+          <div class="col"><h3>Learn</h3>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-docs"/></svg>Documentation</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-docs"/></svg>Tutorials</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-docs"/></svg>Guides</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-blog"/></svg>Blog</a>
+          </div>
+          <div class="col"><h3>Develop</h3>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-api"/></svg>API Reference</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-api"/></svg>Changelog</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-api"/></svg>Examples</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-uiux"/></svg>Components</a>
+          </div>
+          <div class="col"><h3>Support</h3>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-help"/></svg>Help Center</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-help"/></svg>FAQ</a>
+            <a class="mega-link" href="#contact"><svg class="i" aria-hidden="true"><use href="#i-contact"/></svg>Contact Support</a>
+            <a class="mega-link" href="#resources"><svg class="i" aria-hidden="true"><use href="#i-community"/></svg>System Status</a>
+          </div>
+          <div class="feature">
+            <svg class="i" aria-hidden="true"><use href="#i-community"/></svg>
+            <h3>Developer Resources</h3>
+            <p>Explore our resources and start building.</p>
+            <a class="btn-start btn-sm" href="#resources">Explore <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div></div></div>
+      </li>
+
+      <li><a class="nav-link" href="#contact"><svg class="i ico" aria-hidden="true"><use href="#i-contact"/></svg>Contact</a></li>
+      <li class="mobile-cta"><a class="btn-start" href="#contact">Get Started</a></li>
+    </ul>
+
+    <div class="actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to light mode">
+        <svg class="i moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="i sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <a class="btn-start desktop-cta" href="#contact">Start</a>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-list">
+        <svg class="i i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="i i-close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <p class="pill">Navigation component</p>
+    <h1>A navigation system built for developer platforms</h1>
+    <p>Hover, click or use the keyboard to open the Services, Products and Resources menus. Switch themes with the toggle, or resize the window to try the mobile menu.</p>
+  </section>
+  <section class="panel" id="about"><h2>About</h2><p>NEXA is a fictional platform used to demo this component. Everything here is plain HTML, CSS and JavaScript.</p></section>
+  <section class="panel" id="services"><h2>Services</h2><p>Web, mobile, backend, API and automation work, delivered by one team.</p></section>
+  <section class="panel" id="products"><h2>Products</h2><p>SaaS, e-commerce, CRM, analytics and developer tools.</p></section>
+  <section class="panel" id="resources"><h2>Resources</h2><p>Documentation, tutorials, examples and support in one place.</p></section>
+  <section class="panel" id="contact"><h2>Contact</h2><p>hello@nexa.example</p></section>
+</main>
+<script src="script.js" defer></script>
+</body>
+</html>

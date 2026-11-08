@@ -38,5 +38,15 @@ const menuItems = [
     description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
     path: "04-minimal-clean-dropdown/004-minimal-clean-dropdown/",
     tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
+  },
+  {
+    id: "005-NEXA–Dark-Mode-Dropdown-Navigation",
+    name: "NEXA Dark Mode Dropdown Navigation",
+    category: "Dropdown",
+    categoryName: "Dropdown Menus",
+    technology: ["HTML & CSS", "JavaScript"],
+    description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
+    path: "05-NEXA–Dark-Mode-Dropdown-Navigation/005-NEXA–Dark-Mode-Dropdown-Navigation/",
+    tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
   }
 ];
