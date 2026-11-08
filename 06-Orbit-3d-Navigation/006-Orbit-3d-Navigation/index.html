@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORBIT — Explore Beyond The Ordinary</title>
+<meta name="description" content="ORBIT builds spatial products for teams that want to go further.">
+<meta name="theme-color" content="#05060d">
+<link rel="icon" href="assets/icons/orbit.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-logo" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="currentColor"/><ellipse cx="16" cy="16" rx="12" ry="5" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-25 16 16)"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-7.97A6 6 0 0 1 18 9.5 4.25 4.25 0 0 1 17.5 18H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="glow" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a class="logo" href="#home" aria-label="ORBIT home"><svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg><span>ORBIT</span></a>
+    <nav class="nav__main" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#home" data-magnetic>Home</a></li>
+        <li><button class="nav__link" type="button" data-menu="about" aria-expanded="false" aria-controls="panel-about" data-magnetic>About<svg aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+        <li><button class="nav__link" type="button" data-menu="services" aria-expanded="false" aria-controls="panel-services" data-magnetic>Services<svg aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+        <li><button class="nav__link" type="button" data-menu="products" aria-expanded="false" aria-controls="panel-products" data-magnetic>Products<svg aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+        <li><button class="nav__link" type="button" data-menu="resources" aria-expanded="false" aria-controls="panel-resources" data-magnetic>Resources<svg aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+        <li><a class="nav__link" href="#contact" data-magnetic>Contact</a></li>
+        <span class="nav__ind" aria-hidden="true"></span>
+      </ul>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#contact" data-magnetic>Get Started</a>
+    <button class="burger" type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile"><span></span><span></span><span></span></button>
+  </div>
+
+  <div class="panel panel--about" id="panel-about" role="region" aria-label="About ORBIT"><div class="panel__body">
+    <a class="plink stag" style="--i:0" href="#features"><strong>Our story</strong><span>Why we build spatial software.</span></a>
+    <a class="plink stag" style="--i:1" href="#stats"><strong>By the numbers</strong><span>What our teams ship every year.</span></a>
+    <a class="plink stag" style="--i:2" href="#contact"><strong>Work with us</strong><span>Talk to a person within a day.</span></a>
+  </div></div>
+
+  <div class="panel panel--services" id="panel-services" role="region" aria-label="ORBIT services"><div class="panel__body">
+    <div class="orbit" id="orbit" role="group" aria-label="Services orbit. Use arrow keys to move between services.">
+      <span class="orbit__ring" aria-hidden="true"></span>
+      <span class="orbit__ring orbit__ring--b" aria-hidden="true"></span>
+      <div class="orbit__core" aria-hidden="true"><svg><use href="#i-logo"/></svg></div>
+      <button class="orbit__icon" type="button" aria-pressed="false" data-title="Cloud" data-desc="Elastic infrastructure that scales with your launch day." data-href="#features"><svg aria-hidden="true"><use href="#i-cloud"/></svg><span class="orbit__tip">Cloud</span></button>
+      <button class="orbit__icon" type="button" aria-pressed="false" data-title="Security" data-desc="Zero-trust access and continuous monitoring." data-href="#features"><svg aria-hidden="true"><use href="#i-shield"/></svg><span class="orbit__tip">Security</span></button>
+      <button class="orbit__icon" type="button" aria-pressed="false" data-title="Engineering" data-desc="Embedded engineers who ship alongside your team." data-href="#features"><svg aria-hidden="true"><use href="#i-code"/></svg><span class="orbit__tip">Engineering</span></button>
+      <button class="orbit__icon" type="button" aria-pressed="false" data-title="Analytics" data-desc="Live dashboards that explain what changed and why." data-href="#stats"><svg aria-hidden="true"><use href="#i-chart"/></svg><span class="orbit__tip">Analytics</span></button>
+      <button class="orbit__icon" type="button" aria-pressed="false" data-title="AI Studio" data-desc="Prototype, evaluate and deploy intelligent features." data-href="#features"><svg aria-hidden="true"><use href="#i-spark"/></svg><span class="orbit__tip">AI Studio</span></button>
+    </div>
+    <p class="orbit__cap" id="orbit-cap" aria-live="polite"><strong>Pick a service</strong><span>Hover, click or use the arrow keys.</span></p>
+  </div></div>
+
+  <div class="panel panel--products" id="panel-products" role="region" aria-label="ORBIT products"><div class="panel__body">
+    <a class="pcard stag" style="--i:0;--d:0s" href="#features"><i class="pcard__gem"></i><strong>Orbit Core</strong><span>The spatial runtime for apps.</span></a>
+    <a class="pcard stag" style="--i:1;--d:-1.4s" href="#features"><i class="pcard__gem pcard__gem--v"></i><strong>Orbit Pulse</strong><span>Real-time signals and alerts.</span></a>
+    <a class="pcard stag" style="--i:2;--d:-2.8s" href="#features"><i class="pcard__gem pcard__gem--b"></i><strong>Orbit Vault</strong><span>Private data, shared safely.</span></a>
+  </div></div>
+
+  <div class="panel panel--resources" id="panel-resources" role="region" aria-label="ORBIT resources"><div class="panel__body">
+    <div class="col stag" style="--i:0"><h3>Learn</h3><a href="#features">Guides</a><a href="#features">Tutorials</a><a href="#stats">Case studies</a></div>
+    <div class="col stag" style="--i:1"><h3>Build</h3><a href="#features">Documentation</a><a href="#features">API reference</a><a href="#features">Templates</a></div>
+    <div class="col stag" style="--i:2"><h3>Connect</h3><a href="#contact">Community</a><a href="#contact">Support</a><a href="#contact">Book a demo</a></div>
+  </div></div>
+</header>
+
+<div class="mobile" id="mobile" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="mobile__top"><a class="logo" href="#home" data-close><svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg><span>ORBIT</span></a>
+    <button class="mobile__close" type="button" id="mclose" aria-label="Close menu"><span></span><span></span></button></div>
+  <ul class="mobile__list">
+    <li><a class="mobile__link" href="#home" data-close>Home</a></li>
+    <li class="acc"><button class="mobile__link" type="button" aria-expanded="false" aria-controls="acc-about">About<svg aria-hidden="true"><use href="#i-chev"/></svg></button><div class="acc__panel" id="acc-about"><div><a href="#features" data-close>Our story</a><a href="#stats" data-close>By the numbers</a><a href="#contact" data-close>Work with us</a></div></div></li>
+    <li class="acc"><button class="mobile__link" type="button" aria-expanded="false" aria-controls="acc-services">Services<svg aria-hidden="true"><use href="#i-chev"/></svg></button><div class="acc__panel" id="acc-services"><div><a href="#features" data-close>Cloud</a><a href="#features" data-close>Security</a><a href="#features" data-close>Engineering</a><a href="#stats" data-close>Analytics</a><a href="#features" data-close>AI Studio</a></div></div></li>
+    <li class="acc"><button class="mobile__link" type="button" aria-expanded="false" aria-controls="acc-products">Products<svg aria-hidden="true"><use href="#i-chev"/></svg></button><div class="acc__panel" id="acc-products"><div><a href="#features" data-close>Orbit Core</a><a href="#features" data-close>Orbit Pulse</a><a href="#features" data-close>Orbit Vault</a></div></div></li>
+    <li class="acc"><button class="mobile__link" type="button" aria-expanded="false" aria-controls="acc-resources">Resources<svg aria-hidden="true"><use href="#i-chev"/></svg></button><div class="acc__panel" id="acc-resources"><div><a href="#features" data-close>Guides</a><a href="#features" data-close>Documentation</a><a href="#features" data-close>API reference</a><a href="#contact" data-close>Support</a></div></div></li>
+    <li><a class="mobile__link" href="#contact" data-close>Contact</a></li>
+  </ul>
+  <a class="btn btn--primary mobile__cta" href="#contact" data-close>Get Started</a>
+</div>
+
+<main id="main">
+  <section class="hero" id="home">
+    <div class="hero__copy">
+      <p class="pill">Spatial software, now in public beta</p>
+      <h1>Explore Beyond The Ordinary.</h1>
+      <p class="lead">ORBIT gives your team a single workspace for cloud, data and intelligence, built to feel as fast as it looks.</p>
+      <div class="hero__cta"><a class="btn btn--primary" href="#contact">Start for free</a><a class="btn btn--ghost" href="#features">See how it works</a></div>
+    </div>
+    <div class="scene" aria-hidden="true"><div class="rig"><div class="spin">
+      <i class="sphere"></i>
+      <i class="hring hring--1"></i><i class="hring hring--2"></i><i class="hring hring--3"></i>
+      <div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div>
+    </div></div></div>
+  </section>
+
+  <section class="section" id="features" aria-labelledby="f-h">
+    <h2 id="f-h">Built for teams that move fast</h2>
+    <div class="grid">
+      <article class="card reveal"><svg aria-hidden="true"><use href="#i-cloud"/></svg><h3>One workspace</h3><p>Infrastructure, data and deploys in a single view, with no tab juggling.</p></article>
+      <article class="card reveal"><svg aria-hidden="true"><use href="#i-shield"/></svg><h3>Secure by default</h3><p>Every request is verified. Every change is logged and reversible.</p></article>
+      <article class="card reveal"><svg aria-hidden="true"><use href="#i-spark"/></svg><h3>Intelligence built in</h3><p>Ask questions in plain language and get answers from your own data.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="stats" aria-labelledby="s-h">
+    <h2 id="s-h">Trusted at scale</h2>
+    <dl class="stats">
+      <div class="reveal"><dt>Active teams</dt><dd><span data-count="12400">0</span>+</dd></div>
+      <div class="reveal"><dt>Uptime</dt><dd><span data-count="99.99" data-dec="2">0</span>%</dd></div>
+      <div class="reveal"><dt>Countries</dt><dd><span data-count="86">0</span></dd></div>
+      <div class="reveal"><dt>Deploys per day</dt><dd><span data-count="48000">0</span></dd></div>
+    </dl>
+  </section>
+
+  <section class="section cta" id="contact" aria-labelledby="c-h">
+    <h2 id="c-h">Ready to leave orbit?</h2>
+    <p class="lead">Tell us what you are building and we will reply within one business day.</p>
+    <a class="btn btn--primary" href="mailto:hello@orbit.example">Email the team</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <a class="logo" href="#home"><svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg><span>ORBIT</span></a>
+  <nav aria-label="Footer"><a href="#home">Home</a><a href="#features">Features</a><a href="#stats">Stats</a><a href="#contact">Contact</a></nav>
+  <p>&copy; 2026 ORBIT. All rights reserved.</p>
+</footer>
+
+<script src="js/orbit.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/interactions.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
