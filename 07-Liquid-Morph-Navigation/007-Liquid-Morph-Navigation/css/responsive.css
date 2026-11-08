@@ -1,0 +1,27 @@
+/* Breakpoints: desktop compaction <=1100, tablet <=900, mobile experience <768 */
+.mobile{display:none}
+@media (max-width:1100px){.nl .mag{display:none}.nl{padding:10px 12px}}
+@media (max-width:1000px){.res{grid-template-columns:repeat(3,1fr)}.feat{grid-column:1/-1;min-height:120px}}
+@media (max-width:900px){.nav .cta{display:none}}
+@media (max-width:767.98px){
+  .nav-wrap{top:10px}.nav{height:58px;padding:0 8px 0 16px}
+  .links,.nav .cta,.nav .theme-btn,.panel{display:none}
+  .burger{display:block}
+  .mobile{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;padding:12px 20px 28px;overflow-y:auto;overscroll-behavior:contain;background:var(--bg) radial-gradient(80% 50% at 90% 0,rgba(139,92,246,.35),transparent 70%),radial-gradient(70% 50% at 0 100%,rgba(34,211,238,.18),transparent 70%);clip-path:circle(0 at calc(100% - 36px) 38px);visibility:hidden;transition:clip-path .75s var(--ease),visibility 0s .75s}
+  .mobile.open{clip-path:circle(150% at calc(100% - 36px) 38px);visibility:visible;transition-delay:0s}
+  .m-top{display:flex;align-items:center;justify-content:space-between;min-height:58px}
+  .m-list{margin:18px 0 24px;display:grid}
+  .m-list>li{border-bottom:1px solid var(--line)}
+  .m-link{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:60px;font-size:clamp(1.5rem,7vw,2rem);font-weight:700;letter-spacing:-.02em;text-align:left}
+  .acc-btn[aria-expanded=true] .chev{transform:rotate(180deg)}
+  .chev{width:22px;height:22px}
+  .acc-body{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .5s var(--ease),visibility 0s .5s}
+  .acc-btn[aria-expanded=true]+.acc-body{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+  .acc-body>div{overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}
+  .acc-body a{padding:12px 4px;min-height:44px;color:var(--muted);font-size:15px}.acc-body a:hover{color:var(--text)}
+  .acc-body>div::after{content:"";grid-column:1/-1;height:10px}
+  .m-cta{margin-top:auto;padding:18px;font-size:16px}
+  .hero{padding-top:120px}
+}
+@media (max-width:480px){.hero-btns{flex-direction:column;width:100%}.hero-btns>*{width:100%;justify-content:center}.s1,.s2{width:200px;height:200px}.acc-body>div{grid-template-columns:1fr}}
+@media (max-width:360px){.logo{font-size:18px}h1{font-size:2.4rem}}

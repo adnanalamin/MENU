@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLUX — Liquid Morph Navigation</title>
+<meta name="description" content="An animated liquid-morph navigation system in vanilla HTML, CSS and JavaScript.">
+<link rel="icon" href="assets/icons/flux.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('flux-theme')==='light'?'light':'dark'}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/animations.css"><link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5h7a2 2 0 012 2v13a2 2 0 00-2-2H3zM21 5h-7a2 2 0 00-2 2v13a2 2 0 012-2h7z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5l4 4L8 20l-5 1 1-5z"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5.5 5.5 0 0110.5 1.5A3.3 3.3 0 0117 18z"/></symbol>
+<symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3.5"/><path d="M12 4v4M9 13v2M15 13v2"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h3l2.5 11h9L21 7H7M10 20h.01M17 20h.01"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0114 0M16 4.5a3.5 3.5 0 010 7M18 14a7 7 0 013 6"/></symbol>
+<symbol id="i-term" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 10l3 2-3 2M13 15h4"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></symbol>
+<symbol id="i-life" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .8-1.5 1.2-1.5 2.5M12 17h.01"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="nav-wrap" id="navWrap">
+<nav class="nav" aria-label="Primary">
+  <a class="logo" href="#" aria-label="FLUX home">
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path class="lg-a" d="M16 2c7 0 14 5 14 13s-6 15-14 15S2 23 2 16 9 2 16 2z" fill="url(#lg)"/><path class="lg-b" d="M9 20c4-9 9-9 14-8M9 13c4 5 8 5 14 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <span>FLUX</span>
+  </a>
+  <ul class="links" id="links">
+    <li class="ind" role="presentation" aria-hidden="true"></li>
+    <li><a class="nl" href="#" aria-current="page"><svg class="i mag"><use href="#i-home"/></svg>Home</a></li>
+    <li><a class="nl" href="#discover"><svg class="i mag"><use href="#i-compass"/></svg>Discover</a></li>
+    <li><button class="nl" type="button" data-menu="services" aria-expanded="false" aria-controls="panel"><svg class="i mag"><use href="#i-layers"/></svg>Services<svg class="i chev"><use href="#i-chev"/></svg></button></li>
+    <li><button class="nl" type="button" data-menu="products" aria-expanded="false" aria-controls="panel"><svg class="i mag"><use href="#i-box"/></svg>Products<svg class="i chev"><use href="#i-chev"/></svg></button></li>
+    <li><button class="nl" type="button" data-menu="resources" aria-expanded="false" aria-controls="panel"><svg class="i mag"><use href="#i-book"/></svg>Resources<svg class="i chev"><use href="#i-chev"/></svg></button></li>
+    <li><a class="nl" href="#contact"><svg class="i mag"><use href="#i-mail"/></svg>Contact</a></li>
+  </ul>
+  <div class="actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button>
+    <button class="icon-btn theme-btn" type="button" aria-pressed="false" aria-label="Switch to light theme"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+    <a class="cta" href="#">Get Started</a>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="panel" id="panel" data-active="services" role="region" aria-label="Menu details">
+  <div class="pane" data-pane="services" inert>
+    <div class="grid3">
+      <a class="card st" href="#" style="--i:0;--c:#8b5cf6"><span class="ico"><svg class="i"><use href="#i-code"/></svg></span><b>Web Development</b><span>Fast, accessible sites built to scale.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="card st" href="#" style="--i:1;--c:#ec4899"><span class="ico"><svg class="i"><use href="#i-pen"/></svg></span><b>UI/UX Design</b><span>Interfaces shaped by real user research.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="card st" href="#" style="--i:2;--c:#3b82f6"><span class="ico"><svg class="i"><use href="#i-phone"/></svg></span><b>Mobile Development</b><span>Native-feeling apps for iOS and Android.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="card st" href="#" style="--i:3;--c:#22d3ee"><span class="ico"><svg class="i"><use href="#i-server"/></svg></span><b>Backend Engineering</b><span>Reliable APIs, data models and queues.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="card st" href="#" style="--i:4;--c:#10b981"><span class="ico"><svg class="i"><use href="#i-cloud"/></svg></span><b>Cloud Solutions</b><span>Infrastructure that deploys and scales itself.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="card st" href="#" style="--i:5;--c:#f59e0b"><span class="ico"><svg class="i"><use href="#i-bot"/></svg></span><b>AI Automation</b><span>Workflows that handle repetitive work.</span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="pane" data-pane="products" inert>
+    <div class="list">
+      <a class="row st" href="#" style="--i:0"><span class="ico"><svg class="i"><use href="#i-grid"/></svg></span><span><b>SaaS Platforms</b><small>Multi-tenant apps, billing included</small></span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="row st" href="#" style="--i:1"><span class="ico"><svg class="i"><use href="#i-cart"/></svg></span><span><b>E-commerce Systems</b><small>Storefronts, carts and checkout</small></span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="row st" href="#" style="--i:2"><span class="ico"><svg class="i"><use href="#i-chart"/></svg></span><span><b>Analytics Dashboard</b><small>Live metrics in one view</small></span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="row st" href="#" style="--i:3"><span class="ico"><svg class="i"><use href="#i-users"/></svg></span><span><b>CRM Software</b><small>Track customers and deals</small></span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+      <a class="row st" href="#" style="--i:4"><span class="ico"><svg class="i"><use href="#i-term"/></svg></span><span><b>Developer Tools</b><small>CLIs, SDKs and CI helpers</small></span><svg class="i ar"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="pane" data-pane="resources" inert>
+    <div class="res">
+      <div class="col st" style="--i:0"><h3>Learn</h3>
+        <a class="lk" href="#"><svg class="i"><use href="#i-doc"/></svg>Documentation</a><a class="lk" href="#"><svg class="i"><use href="#i-play"/></svg>Tutorials</a><a class="lk" href="#"><svg class="i"><use href="#i-compass"/></svg>Guides</a><a class="lk" href="#"><svg class="i"><use href="#i-pen"/></svg>Blog</a></div>
+      <div class="col st" style="--i:1"><h3>Explore</h3>
+        <a class="lk" href="#"><svg class="i"><use href="#i-chart"/></svg>Case Studies</a><a class="lk" href="#"><svg class="i"><use href="#i-users"/></svg>Community</a><a class="lk" href="#"><svg class="i"><use href="#i-spark"/></svg>Showcase</a><a class="lk" href="#"><svg class="i"><use href="#i-code"/></svg>Examples</a></div>
+      <div class="col st" style="--i:2"><h3>Support</h3>
+        <a class="lk" href="#"><svg class="i"><use href="#i-life"/></svg>Help Center</a><a class="lk" href="#"><svg class="i"><use href="#i-help"/></svg>FAQ</a><a class="lk" href="#"><svg class="i"><use href="#i-mail"/></svg>Contact Support</a><a class="lk" href="#"><svg class="i"><use href="#i-term"/></svg>API Reference</a></div>
+      <a class="feat st" href="#" style="--i:3"><svg class="i"><use href="#i-spark"/></svg><b>FLUX 2.0 is here</b><span>See what's new in motion, theming and performance.</span><span class="feat-go">Read the release notes <svg class="i ar"><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="mobile" id="mobile" inert aria-hidden="true">
+  <div class="m-top m-in" style="--i:0">
+    <a class="logo" href="#"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M16 2c7 0 14 5 14 13s-6 15-14 15S2 23 2 16 9 2 16 2z" fill="url(#lg)"/></svg><span>FLUX</span></a>
+    <span class="actions"><button class="icon-btn theme-btn" type="button" aria-pressed="false" aria-label="Switch to light theme"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+    <button class="icon-btn" id="mClose" type="button" aria-label="Close menu"><svg class="i"><use href="#i-x"/></svg></button></span>
+  </div>
+  <ul class="m-list">
+    <li class="m-in" style="--i:1"><a class="m-link" href="#">Home</a></li>
+    <li class="m-in" style="--i:2"><a class="m-link" href="#discover">Discover</a></li>
+    <li class="m-in" style="--i:3"><button class="m-link acc-btn" type="button" aria-expanded="false" aria-controls="acc1">Services<svg class="i chev"><use href="#i-chev"/></svg></button>
+      <div class="acc-body" id="acc1"><div><a href="#">Web Development</a><a href="#">UI/UX Design</a><a href="#">Mobile Development</a><a href="#">Backend Engineering</a><a href="#">Cloud Solutions</a><a href="#">AI Automation</a></div></div></li>
+    <li class="m-in" style="--i:4"><button class="m-link acc-btn" type="button" aria-expanded="false" aria-controls="acc2">Products<svg class="i chev"><use href="#i-chev"/></svg></button>
+      <div class="acc-body" id="acc2"><div><a href="#">SaaS Platforms</a><a href="#">E-commerce Systems</a><a href="#">Analytics Dashboard</a><a href="#">CRM Software</a><a href="#">Developer Tools</a></div></div></li>
+    <li class="m-in" style="--i:5"><button class="m-link acc-btn" type="button" aria-expanded="false" aria-controls="acc3">Resources<svg class="i chev"><use href="#i-chev"/></svg></button>
+      <div class="acc-body" id="acc3"><div><a href="#">Documentation</a><a href="#">Tutorials</a><a href="#">Guides</a><a href="#">Blog</a><a href="#">Case Studies</a><a href="#">Community</a><a href="#">Showcase</a><a href="#">Examples</a><a href="#">Help Center</a><a href="#">FAQ</a><a href="#">Contact Support</a><a href="#">API Reference</a></div></div></li>
+    <li class="m-in" style="--i:6"><a class="m-link" href="#contact">Contact</a></li>
+  </ul>
+  <a class="cta m-cta m-in" style="--i:7" href="#">Get Started</a>
+</div>
+
+<dialog id="search" aria-label="Search"><form method="dialog"><input type="search" placeholder="Search FLUX" aria-label="Search FLUX"><button class="cta" value="close">Close</button></form></dialog>
+
+<main id="main">
+  <section class="hero">
+    <i class="shape s1" aria-hidden="true"></i><i class="shape s2" aria-hidden="true"></i><i class="shape s3" aria-hidden="true"></i>
+    <p class="label">Creative digital experience</p>
+    <h1>Navigation, reimagined.</h1>
+    <p class="lead">Experience a new dimension of interaction with fluid transitions, expressive motion, and beautifully crafted navigation.</p>
+    <div class="hero-btns"><a class="cta" href="#">Explore Components</a><a class="ghost" href="#">View Documentation</a></div>
+  </section>
+</main>
+
+<script src="js/animations.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

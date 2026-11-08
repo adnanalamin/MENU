@@ -1,0 +1,24 @@
+/* Keyframes and motion helpers */
+@keyframes rise{from{opacity:0;transform:translate3d(0,14px,0) scale(.97)}to{opacity:1;transform:none}}
+@keyframes draw{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(30px,-34px,0) rotate(12deg)}}
+@keyframes sheen{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+@keyframes blob{0%,100%{border-radius:42% 58% 63% 37%/45% 40% 60% 55%}50%{border-radius:60% 40% 35% 65%/55% 62% 38% 45%}}
+.pane.on .st{animation:rise .65s var(--ease) both;animation-delay:calc(var(--i,0)*50ms + 90ms)}
+.pane.on .feat{animation:rise .65s var(--ease) both,sheen 9s ease-in-out infinite;animation-delay:calc(var(--i,0)*50ms + 90ms),0s}
+.card:hover .ico .i,.row:hover .ico .i,.lk:hover .i,.icon-btn:hover .i:not(.sun):not(.moon),.nl:hover .mag{animation:draw .7s ease both}
+.nl[aria-expanded=true] .chev{transform:rotate(180deg)}
+.logo .lg-b{transform-origin:16px 16px;transition:transform .7s var(--ease)}
+.logo:hover .lg-b{transform:rotate(25deg)}
+.logo:hover .lg-a{animation:blob 1.4s ease-in-out}
+.s1,.s2{animation:drift 18s ease-in-out infinite,blob 14s ease-in-out infinite}
+.s2{animation-duration:22s,17s;animation-direction:reverse,normal}
+.s3{animation:drift 26s ease-in-out infinite}
+.hero .label,.hero h1,.hero .lead,.hero-btns{animation:rise .9s var(--ease) both}
+.hero h1{animation-delay:.1s}.hero .lead{animation-delay:.2s}.hero-btns{animation-delay:.3s}
+.burger{position:relative;width:44px;height:44px;border-radius:50%}
+.burger span{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:currentColor;transition:transform .5s var(--ease),opacity .25s}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:26px}
+.burger.x span:nth-child(1){transform:translateY(5px) rotate(45deg)}.burger.x span:nth-child(2){opacity:0;transform:scaleX(.2)}.burger.x span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mobile.open .m-in{animation:rise .6s var(--ease) both;animation-delay:calc(var(--i)*60ms + 220ms)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}

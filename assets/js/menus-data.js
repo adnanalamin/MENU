@@ -20,13 +20,13 @@ const menuItems = [
     tags: ["dropdown", "click", "keyboard", "accessible", "submenu"]
   },
   {
-    id: "003-glassmorphism-dropdown",
+    id: "003-Glassmorphism-Dropdown",
     name: "Glassmorphism Dropdown",
     category: "Dropdown",
     categoryName: "Dropdown Menus",
     technology: ["HTML & CSS", "JavaScript"],
     description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
-    path: "03-dropdown-menus/003-dropdown-menus/",
+    path: "03-Glassmorphism-Dropdown/003-Glassmorphism-Dropdown/",
     tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
   },
   {
@@ -58,6 +58,16 @@ const menuItems = [
     technology: ["HTML & CSS", "JavaScript"],
     description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
     path: "06-Orbit-3d-Navigation/006-Orbit-3d-Navigation/",
+    tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
+  } ,
+  {
+    id: "007-Liquid-Morph-Navigation",
+    name: "Liquid Morph Navigation",
+    category: "Dropdown",
+    categoryName: "Dropdown Menus",
+    technology: ["HTML & CSS", "JavaScript"],
+    description: "A modern glass-effect dropdown menu with a clean interface and smooth interactions.",
+    path: "07-Liquid-Morph-Navigation/007-Liquid-Morph-Navigation/",
     tags: ["dropdown", "glassmorphism", "modern", "blur", "submenu"]
   }
 ];
